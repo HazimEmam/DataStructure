@@ -18,7 +18,6 @@ deque<int> string_to_vector(string &s){
     }
     return v;
 }
-
 template <typename T>
 void shellSort(deque<T> &dq , int size , int &comparison , int &move){
     for(int gap = size/2 ; gap > 0 ; gap/=2){
@@ -36,6 +35,44 @@ void shellSort(deque<T> &dq , int size , int &comparison , int &move){
         }
     }
 }
+template <typename T>
+void merge(deque<T> &dq , int l ,int mid, int r){
+    // i -> left sub-array
+    // j -> right sub-array
+    // k -> tmp array
+    int i = mid - l + 1 , k=l , j = r - mid;
+    vector<T> v;
+    for(;i <= mid && j <= r; k++){
+        if(dq[i] <= dq[j]){
+            v[k] = dq[i];
+            i++;
+        }else{
+            v[k] = dq[j];
+            j++;
+        }
+    }
+    for (;i<=mid;k++ , i++) {
+        v[k] = dq[i];
+    }
+    for (;j<=r;k++ , j++) {
+        v[k] = dq[j];
+    }
+
+    for (int m = l; m <= r ; ++m) {
+        dq[m] = v[m];
+    }
+}
+template <typename T>
+void mergeSort(deque<T> &dq , int l , int r){
+    if (l < r ) {
+        int mid = l + ((r - l) / 2);
+        mergeSort(dq, l, mid);
+        mergeSort(dq, mid + 1, r);
+        merge(dq, l, mid, r);
+    }
+    return;
+}
+
 int main() {
     fstream myFile;
     myFile.open("arrays.txt",ios::in);
@@ -60,10 +97,19 @@ int main() {
             cout<<"Shell Sort:"<<endl;
             cout<<" Sorted Array: ";
             printArray(shellTmp,size);
+            cout<<endl;
             cout<<" Comparisons: "<<comparison<<endl;
             cout<<" Moves: "<<move<<endl;
             cout<<endl;
             /*-----------------merge sort------------*/
+            comparison = 0 , move = 0;
+            mergeSort(mergeTmp , 0 , size);
+            cout<<"merge Sort:"<<endl;
+            cout<<" Sorted Array: ";
+            printArray(mergeTmp,size);
+            cout<<" Comparisons: "<<comparison<<endl;
+            cout<<" Moves: "<<move<<endl;
+            cout<<endl;
         }
         myFile.close();
     }
