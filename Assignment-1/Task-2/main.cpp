@@ -35,42 +35,59 @@ void shellSort(deque<T> &dq , int size , int &comparison , int &move){
         }
     }
 }
-template <typename T>
-void merge(deque<T> &dq , int l ,int mid, int r){
-    // i -> left sub-array
-    // j -> right sub-array
-    // k -> tmp array
-    int i = mid - l + 1 , k=l , j = r - mid;
-    vector<T> v;
-    for(;i <= mid && j <= r; k++){
-        if(dq[i] <= dq[j]){
-            v[k] = dq[i];
+void merge(deque<int> &arr ,int l , int mid , int r){
+    int i,j,k;
+    int n1 = mid - l + 1;
+    int n2 = r - mid;
+
+    int leftArr[n1] , rightArr[n2];
+    //copy items of array to the sub-arrays
+    for (int m = 0; m < n1; ++m) {
+        leftArr[m] = arr[ l + m];
+    }
+    for (int m = 0; m < n2; ++m) {
+        rightArr[m] = arr[mid+1+m];
+    }
+
+    i=0 , j=0, k=l;
+
+    for (;i<n1&&j<n2;k++) {
+        if(leftArr[i] <= rightArr[j]){
+            arr[k] = leftArr[i];
             i++;
         }else{
-            v[k] = dq[j];
+            arr[k] = rightArr[j];
             j++;
         }
     }
-    for (;i<=mid;k++ , i++) {
-        v[k] = dq[i];
+    for (;i<n1;k++) {
+        arr[k] = leftArr[i];
+        i++;
     }
-    for (;j<=r;k++ , j++) {
-        v[k] = dq[j];
-    }
-
-    for (int m = l; m <= r ; ++m) {
-        dq[m] = v[m];
+    for (;j<n2;k++) {
+        arr[k] = rightArr[j];
+        j++;
     }
 }
-template <typename T>
-void mergeSort(deque<T> &dq , int l , int r){
-    if (l < r ) {
-        int mid = l + ((r - l) / 2);
-        mergeSort(dq, l, mid);
-        mergeSort(dq, mid + 1, r);
-        merge(dq, l, mid, r);
+void mergeSort(deque<int> &arr, int l , int r){
+    if (l < r){
+        int mid = (l+r)/2;
+        mergeSort(arr,l,mid);
+        mergeSort(arr, mid+1,r);
+        merge(arr , l , mid , r);
     }
-    return;
+}
+void selectionSort(deque<int> &arr , int size , int &comparison , int &move){
+    for (int i = 0, j, min; i < size-1; ++i) {
+        for (j = i+1 , min = i; j < size; ++j) {
+            if(arr[j] < arr[min]){
+                comparison++;
+                min = j;
+            }
+        }
+        swap(arr[i],arr[min]);
+        move++;
+    }
 }
 
 int main() {
@@ -100,13 +117,22 @@ int main() {
             cout<<endl;
             cout<<" Comparisons: "<<comparison<<endl;
             cout<<" Moves: "<<move<<endl;
-            cout<<endl;
             /*-----------------merge sort------------*/
             comparison = 0 , move = 0;
-            mergeSort(mergeTmp , 0 , size);
+            mergeSort(mergeTmp , 0 , size - 1);
             cout<<"merge Sort:"<<endl;
             cout<<" Sorted Array: ";
             printArray(mergeTmp,size);
+            cout<<endl;
+            cout<<" Comparisons: "<<comparison<<endl;
+            cout<<" Moves: "<<move<<endl;
+            /*-----------------selection sort------------*/
+            comparison = 0 , move = 0;
+            selectionSort(selectionTmp , size , comparison, move);
+            cout<<"selection Sort:"<<endl;
+            cout<<" Sorted Array: ";
+            printArray(selectionTmp,size);
+            cout<<endl;
             cout<<" Comparisons: "<<comparison<<endl;
             cout<<" Moves: "<<move<<endl;
             cout<<endl;

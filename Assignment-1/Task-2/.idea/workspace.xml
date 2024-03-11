@@ -56,6 +56,7 @@
     "WebServerToolWindowFactoryState": "false",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
+    "last_opened_file_path": "D:/1.EDU/4'th/2'nd/DS/code",
     "structure.view.defaults.are.configured": "true"
   }
 }]]></component>
@@ -84,6 +85,8 @@
       <workItem from="1709871269327" duration="581000" />
       <workItem from="1709986906528" duration="174000" />
       <workItem from="1709987128923" duration="9748000" />
+      <workItem from="1710163335605" duration="331000" />
+      <workItem from="1710163679558" duration="1930000" />
     </task>
     <servers />
   </component>
@@ -116,7 +119,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/main.cpp</url>
-          <line>75</line>
+          <line>92</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
