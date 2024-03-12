@@ -24,14 +24,15 @@ void shellSort(deque<T> &dq , int size , int &comparison , int &move){
         for (int i = gap ; i < size ; ++i) {
             T temp = dq[i];
             int j = i;
+            ++comparison;
             for( ;j >= gap && temp < dq[j - gap]; j-=gap){ // 3  4
-                comparison++;
+                ++comparison;
                 dq[j] = dq[j- gap];
                 move++;
 
             }
             dq[j] = temp;
-            move++;
+
         }
     }
 }
@@ -80,13 +81,15 @@ void mergeSort(deque<int> &arr, int l , int r){
 void selectionSort(deque<int> &arr , int size , int &comparison , int &move){
     for (int i = 0, j, min; i < size-1; ++i) {
         for (j = i+1 , min = i; j < size; ++j) {
+            ++comparison;
             if(arr[j] < arr[min]){
-                comparison++;
                 min = j;
             }
         }
+
         swap(arr[i],arr[min]);
-        move++;
+        move+=3;
+
     }
 }
 
