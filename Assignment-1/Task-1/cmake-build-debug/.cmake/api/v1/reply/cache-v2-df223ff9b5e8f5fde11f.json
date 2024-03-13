@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "d:/1.EDU/4'th/2'nd/DS/Assignment/Assignment-1/Task-1/cmake-build-debug"
+			"value" : "c:/Users/hazim/OneDrive/Documents/GitHub/DataStructure/Assignment-1/Task-1/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -623,7 +623,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "D:/1.EDU/4'th/2'nd/DS/Assignment/Assignment-1/Task-1"
+			"value" : "C:/Users/hazim/OneDrive/Documents/GitHub/DataStructure/Assignment-1/Task-1"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -1239,7 +1239,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "D:/1.EDU/4'th/2'nd/DS/Assignment/Assignment-1/Task-1/cmake-build-debug"
+			"value" : "C:/Users/hazim/OneDrive/Documents/GitHub/DataStructure/Assignment-1/Task-1/cmake-build-debug"
 		},
 		{
 			"name" : "Task_1_IS_TOP_LEVEL",
@@ -1263,7 +1263,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "D:/1.EDU/4'th/2'nd/DS/Assignment/Assignment-1/Task-1"
+			"value" : "C:/Users/hazim/OneDrive/Documents/GitHub/DataStructure/Assignment-1/Task-1"
 		}
 	],
 	"kind" : "cache",

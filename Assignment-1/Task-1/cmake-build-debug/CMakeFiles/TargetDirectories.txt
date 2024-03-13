@@ -1,3 +1,3 @@
-D:/1.EDU/4'th/2'nd/DS/Assignment/Assignment-1/Task-1/cmake-build-debug/CMakeFiles/Task_1.dir
-D:/1.EDU/4'th/2'nd/DS/Assignment/Assignment-1/Task-1/cmake-build-debug/CMakeFiles/edit_cache.dir
-D:/1.EDU/4'th/2'nd/DS/Assignment/Assignment-1/Task-1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/hazim/OneDrive/Documents/GitHub/DataStructure/Assignment-1/Task-1/cmake-build-debug/CMakeFiles/Task_1.dir
+C:/Users/hazim/OneDrive/Documents/GitHub/DataStructure/Assignment-1/Task-1/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/hazim/OneDrive/Documents/GitHub/DataStructure/Assignment-1/Task-1/cmake-build-debug/CMakeFiles/rebuild_cache.dir

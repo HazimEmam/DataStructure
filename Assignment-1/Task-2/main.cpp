@@ -8,7 +8,12 @@ void printArray(deque<T> dq, int n)
     for (int i=0; i < n; i++)
         cout << dq[i] << " ";
 }
-
+void printArray(vector<int> v , int n){
+    for (int i = 0; i < n; ++i) {
+        cout<<v[i]<<' ';
+    }
+    cout<<endl;
+}
 deque<int> string_to_vector(string &s){
     deque<int> v;
     stringstream ss(s);
@@ -92,55 +97,99 @@ void selectionSort(deque<int> &arr , int size , int &comparison , int &move){
 
     }
 }
-
+void linerInsertionSort(vector<int> &v, int size, int &comparison, int &shift);
+void binaryInsertionSort(vector<int> &v, int size, int &comparison, int &shift);
 int main() {
-    fstream myFile;
-    myFile.open("arrays.txt",ios::in);
-    if(myFile.is_open()){
-        string line;
-        deque<int> v;
-        deque<int> shellTmp;
-        deque<int> selectionTmp;
-        deque<int> mergeTmp;
-        while(getline(myFile,line)){
-            v = string_to_vector(line);
-            int size = v[0];
-            v.pop_front();
-            shellTmp = v , selectionTmp = v , mergeTmp = v;
-            int comparison = 0 , move = 0;
-            //cout<<comparison<<' '<< move << endl;
-            /*-----------------Shell sort------------*/
-            cout<<"Original array: ";
-            printArray(v , size);
-            cout<<endl;
-            shellSort(shellTmp, size,comparison,move);
-            cout<<"Shell Sort:"<<endl;
-            cout<<" Sorted Array: ";
-            printArray(shellTmp,size);
-            cout<<endl;
-            cout<<" Comparisons: "<<comparison<<endl;
-            cout<<" Moves: "<<move<<endl;
-            /*-----------------merge sort------------*/
-            comparison = 0 , move = 0;
-            mergeSort(mergeTmp , 0 , size - 1);
-            cout<<"merge Sort:"<<endl;
-            cout<<" Sorted Array: ";
-            printArray(mergeTmp,size);
-            cout<<endl;
-            cout<<" Comparisons: "<<comparison<<endl;
-            cout<<" Moves: "<<move<<endl;
-            /*-----------------selection sort------------*/
-            comparison = 0 , move = 0;
-            selectionSort(selectionTmp , size , comparison, move);
-            cout<<"selection Sort:"<<endl;
-            cout<<" Sorted Array: ";
-            printArray(selectionTmp,size);
-            cout<<endl;
-            cout<<" Comparisons: "<<comparison<<endl;
-            cout<<" Moves: "<<move<<endl;
-            cout<<endl;
+    string s;
+    do{
+        cout<<"Please select option:"<<endl;
+        cout<<"1.Task_1:Insertion sort and Binary Search"<<endl;
+        cout<<"2.Task_2:Selection, Shell, and Merge Sort"<<endl;
+        cout<<"3.Exit"<<endl;
+        cin>>s;
+        if(s=="1"){
+            int t;
+            cout<<"Number of test cases:";
+            cin>>t;
+            while (t--){
+                int size , comparison = 0 , shift = 0;
+                vector<int> v;
+                cout<<"enter size of the array:";
+                cin>>size;
+                cout<<"enter array items:";
+                for (int i = 0; i < size; ++i) {
+                    int x;
+                    cin>>x;
+                    v.push_back(x);
+                }
+                vector<int> linerTmp=v , binaryTmp=v;
+                //linerInsertionSort(linerTmp, size, comparison,shift);
+                cout<<"liner Insertion sort: ";
+                printArray(v , size);
+                cout<<"Comparisons:"<<comparison<<endl;
+                cout<<"Shifts:"<<shift<<endl;
+                cout<<endl;
+                comparison = 0 , shift = 0;
+                //binaryInsertionSort(binaryTmp, size, comparison, shift);
+                cout<<"Binary Insertion sort: ";
+                printArray(v , size);
+                cout<<"Comparisons:"<<comparison<<endl;
+                cout<<"Shifts:"<<shift<<endl;
+            }
+        }else if(s == "2"){
+            fstream myFile;
+            myFile.open("arrays.txt",ios::in);
+            if(myFile.is_open()){
+                string line;
+                deque<int> v;
+                deque<int> shellTmp;
+                deque<int> selectionTmp;
+                deque<int> mergeTmp;
+                while(getline(myFile,line)){
+                    v = string_to_vector(line);
+                    int size = v[0];
+                    v.pop_front();
+                    shellTmp = v , selectionTmp = v , mergeTmp = v;
+                    int comparison = 0 , move = 0;
+                    //cout<<comparison<<' '<< move << endl;
+                    /*-----------------Shell sort------------*/
+                    cout<<"Original array: ";
+                    printArray(v , size);
+                    cout<<endl;
+                    shellSort(shellTmp, size,comparison,move);
+                    cout<<"Shell Sort:"<<endl;
+                    cout<<" Sorted Array: ";
+                    printArray(shellTmp,size);
+                    cout<<endl;
+                    cout<<" Comparisons: "<<comparison<<endl;
+                    cout<<" Moves: "<<move<<endl;
+                    /*-----------------merge sort------------*/
+                    comparison = 0 , move = 0;
+                    mergeSort(mergeTmp , 0 , size - 1);
+                    cout<<"merge Sort:"<<endl;
+                    cout<<" Sorted Array: ";
+                    printArray(mergeTmp,size);
+                    cout<<endl;
+                    cout<<" Comparisons: "<<comparison<<endl;
+                    cout<<" Moves: "<<move<<endl;
+                    /*-----------------selection sort------------*/
+                    comparison = 0 , move = 0;
+                    selectionSort(selectionTmp , size , comparison, move);
+                    cout<<"selection Sort:"<<endl;
+                    cout<<" Sorted Array: ";
+                    printArray(selectionTmp,size);
+                    cout<<endl;
+                    cout<<" Comparisons: "<<comparison<<endl;
+                    cout<<" Moves: "<<move<<endl;
+                    cout<<endl;
+                }
+                myFile.close();
+            }
+        }else{
+            cout<<"Please enter valid number."<<endl;
         }
-        myFile.close();
-    }
+    } while (s != "3");
+
+
     return 0;
 }
