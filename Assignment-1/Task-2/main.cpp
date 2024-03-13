@@ -97,11 +97,50 @@ void selectionSort(deque<int> &arr , int size , int &comparison , int &move){
 
     }
 }
-void linerInsertionSort(vector<int> &v, int size, int &comparison, int &shift);
-void binaryInsertionSort(vector<int> &v, int size, int &comparison, int &shift);
+void linerInsertionSort(vector<int> &v, int size, int &comparison, int &shift){
+    for (int i = 1; i < size; ++i) {
+        int j = i;
+        int key = v[i];
+        comparison++;
+        for (; j > 0  && key < v[j-1] ; --j) {
+            //comparison++;
+            v[j]= v[j-1];
+            shift++;
+        }
+        v[j]= key;
+        shift++;
+    }
+}
+void binaryInsertionSort(vector<int> &v, int size, int &comparison, int &shift){
+    for (int i = 1; i < size; ++i) {
+        int l = 0 , r = i - 1 ;
+        int key = v[i];
+        //binary search on the postion
+        while (l <= r){
+            int mid = l+((r-l)/2);
+
+            if(v[mid] > key){
+                r = mid - 1;
+                comparison++;
+            }else{
+                l = mid + 1;
+                comparison++;
+            }
+        }
+        //shift elements to make space
+        for (int j = i - 1; j >= l ; --j) {
+            v[ j + 1 ] = v[j];
+            shift++;
+        }
+        v[l] = key;
+        shift++;
+
+    }
+}
 int main() {
     string s;
     do{
+        cout<<endl;
         cout<<"Please select option:"<<endl;
         cout<<"1.Task_1:Insertion sort and Binary Search"<<endl;
         cout<<"2.Task_2:Selection, Shell, and Merge Sort"<<endl;
@@ -122,19 +161,21 @@ int main() {
                     cin>>x;
                     v.push_back(x);
                 }
+                cout<<endl;
                 vector<int> linerTmp=v , binaryTmp=v;
-                //linerInsertionSort(linerTmp, size, comparison,shift);
+                linerInsertionSort(linerTmp, size, comparison,shift);
                 cout<<"liner Insertion sort: ";
-                printArray(v , size);
+                printArray(linerTmp , size);
                 cout<<"Comparisons:"<<comparison<<endl;
                 cout<<"Shifts:"<<shift<<endl;
                 cout<<endl;
                 comparison = 0 , shift = 0;
-                //binaryInsertionSort(binaryTmp, size, comparison, shift);
+                binaryInsertionSort(binaryTmp, size, comparison, shift);
                 cout<<"Binary Insertion sort: ";
-                printArray(v , size);
+                printArray(binaryTmp , size);
                 cout<<"Comparisons:"<<comparison<<endl;
                 cout<<"Shifts:"<<shift<<endl;
+
             }
         }else if(s == "2"){
             fstream myFile;
