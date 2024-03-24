@@ -2,6 +2,7 @@
 using namespace std;
 
 #define endl '\n';
+
 class Student{
 private:
     string name;
@@ -72,9 +73,10 @@ public:
     void display(){
         Node* temp = head;
         while (temp != NULL){
-            cout<<temp->student.getName()<<' '<<temp->student.getID()<<' '<<temp->student.getGPA()<<endl;
+            cout<<"Name: "<<temp->student.getName()<<", ID: "<<temp->student.getID()<<", GPA: "<<temp->student.getGPA()<<endl;
             temp = temp->next;
         }
+        cout<<endl;
     }
     int size(){
         Node* temp = head;
@@ -85,26 +87,81 @@ public:
         }
         return count;
     }
+    bool search(int id){
+        Node* temp = head;
+        if(head==NULL) {
+            cout << "Sorry, There is no items in the list"<<endl;
+            return false;
+        }else{
+            while(temp != NULL){
+                if(temp->student.getID() == id){
+                    cout<<"Name: "<<temp->student.getName()<<", ID: "<<temp->student.getID()<<", GPA: "<<temp->student.getGPA()<<endl;
+                    return true;
+                }else{
+                    temp=temp->next;
+                }
+            }
+            cout<<"Sorry, There is no student with this ID in the list"<<endl;
+        }
+    }
+    bool search(string name){
+        Node* temp = head;
+        if(head==NULL) {
+            cout << "Sorry, There is no items in the list"<<endl;
+            return false;
+        }else{
+            while(temp != NULL){
+                if(temp->student.getName() == name){
+                    cout<<"Name: "<<temp->student.getName()<<", ID: "<<temp->student.getID()<<", GPA: "<<temp->student.getGPA()<<endl;
+                    return true;
+                }else{
+                    temp=temp->next;
+                }
+            }
+            cout<<"Sorry, There is no student with this Name in the list"<<endl;
+            return false;
+        }
+    }
+    void Delete(int id){
+        Node* temp = head;
+        Node* prev= NULL;
+        if(!search(id)){
+            cout<<"Sorry, There is no student with this ID in the list";
+        }else{
+            //1-head
+            if(head->student.getID() == id){
+                head=head->next;
+                delete temp;
+            }
+            //2-mid
+            //3-tail
+        }
+    }
+    ~StudentList() {
+        Node* temp = head;
+        while (temp != NULL) {
+            Node* next = temp->next;
+            delete temp;
+            temp = next;
+        }
+        head = tail = NULL;
+    }
 };
 int main() {
     Student s1("hazim",15,2.5);
+    Student s2("emam",16,2.5);
     Student s3("mohamed",17,2.5);
+    Student s4("ali",18,2.5);
     StudentList list;
     list.insert(s1);
-    list.insert(s3);
-    list.display();
-    cout<<list.size()<<endl;
-    Student s2("emam",16,2.5);
     list.insert(s2);
-    list.display();
-    cout<<list.size()<<endl;
-    Student s4("ali",18,2.5);
+    list.insert(s3);
     list.insert(s4);
     list.display();
-    cout<<list.size()<<endl;
-    Student s5("ali",14,2.5);
-    list.insert(s5);
+    list.Delete(15);
+   // list.display();
+//    list.Delete(17);
     list.display();
-    cout<<list.size()<<endl;
+    list.display();
     return 0;
 }
