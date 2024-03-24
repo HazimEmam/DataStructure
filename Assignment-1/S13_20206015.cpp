@@ -127,8 +127,6 @@ void binaryInsertionSort(vector<int> &v, int size, int &comparison, int &shift){
                 comparison++;
             }
         }
-        //2 4 1 8
-        //2 4 1 8
         //shift elements to make space
         for (int j = i - 1; j >= l ; --j) {
             v[ j + 1 ] = v[j];
