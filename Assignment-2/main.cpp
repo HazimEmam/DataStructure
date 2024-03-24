@@ -70,14 +70,7 @@ public:
             }
         }
     }
-    void display(){
-        Node* temp = head;
-        while (temp != NULL){
-            cout<<"Name: "<<temp->student.getName()<<", ID: "<<temp->student.getID()<<", GPA: "<<temp->student.getGPA()<<endl;
-            temp = temp->next;
-        }
-        cout<<endl;
-    }
+
     int size(){
         Node* temp = head;
         int count=0;
@@ -123,19 +116,36 @@ public:
         }
     }
     void Delete(int id){
-        Node* temp = head;
+        Node* deltemp = head;
         Node* prev= NULL;
-        if(!search(id)){
-            cout<<"Sorry, There is no student with this ID in the list";
-        }else{
-            //1-head
-            if(head->student.getID() == id){
-                head=head->next;
-                delete temp;
-            }
-            //2-mid
-            //3-tail
+
+        while(deltemp != NULL && deltemp->student.getID() != id){
+            prev=deltemp;
+            deltemp=deltemp->next;
         }
+        if(deltemp== nullptr){
+            cout<<"Sorry, There is no student with this ID in the list"<<endl;
+        }else{
+            if(prev == NULL){
+                head=head->next;
+            }else{
+                prev->next=deltemp->next;
+            }
+            if(deltemp == tail){
+                tail=prev;
+            }
+            delete deltemp;
+            cout<<"the student with id "<<id<<" deleted"<<endl;
+        }
+
+    }
+    void display(){
+        Node* temp = head;
+        while (temp != NULL){
+            cout<<"Name: "<<temp->student.getName()<<", ID: "<<temp->student.getID()<<", GPA: "<<temp->student.getGPA()<<endl;
+            temp = temp->next;
+        }
+        cout<<endl;
     }
     ~StudentList() {
         Node* temp = head;
@@ -157,11 +167,17 @@ int main() {
     list.insert(s2);
     list.insert(s3);
     list.insert(s4);
+    list.Delete(11);
     list.display();
     list.Delete(15);
-   // list.display();
-//    list.Delete(17);
     list.display();
+    list.Delete(17);
+    list.display();
+    list.Delete(18);
+    list.display();
+    list.insert(s1);
+    list.insert(s3);
+    list.insert(s4);
     list.display();
     return 0;
 }
