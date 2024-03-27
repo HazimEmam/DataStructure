@@ -30,6 +30,24 @@ public:
             tail = newNode;
         }
     }
+    void insertAt(char c, int index){
+        Node* temp = head;
+        Node* after= nullptr;
+        Node* newNode = new Node();
+        if(index == size()-1){
+            insert(c);
+            return;
+        }
+        for (int i = 0; i < index; ++i) {
+            temp=temp->next;
+        }
+        after = temp->next;
+        newNode->value=c;
+        temp->next = newNode;
+        newNode->previous = temp;
+        newNode->next=after;
+        after->previous=newNode;
+    }
     void concatenat(DoubleList list2){
         if(list2.head == nullptr){
             return;
@@ -105,29 +123,54 @@ public:
         cout<<endl;
     }
 
-    int Search(string str){
+    int Search(string substr) {
+        if (substr.empty() || head == nullptr)
+            return -1;
         Node* temp = head;
-        string s;
-        for (int i = 0 , j = 0; i < size() ; ++i) {
-            if(temp->value == str[j]){
-                s = s+str[j];
-                j++;
-                //cout<<s<<endl;
+        int index = 0;
+        while (temp != nullptr) {
+            if (match(temp, substr)){
+                subIndex = index;
+                return subIndex;
             }
             temp = temp->next;
-        }
-        if( s == str){
-            temp = head;
-            for (int i = 0; i < size() ; ++i) {
-                if(temp->value == str[0]){
-                    subIndex = i;
-                    break;
-                }
-                temp = temp->next;
-            }
-            return subIndex;
+            index++;
         }
         return -1;
+    }
+
+    bool match(Node* start, string substr) {
+        Node* temp = start;
+        int i = 0;
+        while (temp != nullptr && i < substr.size()) {
+            if (temp->value != substr[i])
+                return false;
+            temp = temp->next;
+            i++;
+        }
+        return i == substr.size();
+    }
+
+    void replace(string s1 , string s2 , int index){
+        Node* firstTemp = head;
+        Node* secondTemp = head->next;
+        int counter = index;
+        for (int i = 0; i < index; ++i) {
+            firstTemp=firstTemp->next;
+            secondTemp=secondTemp->next;
+        }
+        for (int i = 0; i < s2.size(); ++i) {
+            if(firstTemp != nullptr && firstTemp->value == s1[i]){
+                firstTemp->value = s2[i];
+                firstTemp=firstTemp->next;
+                counter++;
+            }else{
+                insertAt(s2[i],counter-1);
+                counter++;
+            }
+        }
+
+
     }
     void printReverse(){
         Node* temp = tail;
@@ -184,6 +227,21 @@ int main() {
             cout<<"There is no match strings"<<endl;
         }
     }
+    flag = false;
+    while(!flag){
+        string str1 , str2;
+        cout<<"Enter 2 substrings to replace one with another:";
+        cin>>str1>>str2;
+        int result = list1.Search(str1);
+        if(result == -1){
+            cout<<"Please enter valid substring to replace"<<endl;
+        }else{
+            list1.replace(str1,str2,result);
+            flag = true;
+        }
+    }
+    cout<<"List after replace:";
+    list1.printForward();
     cout<<"Reversed List: ";
     list1.printReverse();
     return 0;
