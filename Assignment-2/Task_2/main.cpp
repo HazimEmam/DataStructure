@@ -3,37 +3,37 @@ using namespace std;
 
 #define endl '\n';
 int subIndex = -1;
-class Node{
+class DoubleNode{
 public:
     char value;
-    Node* next;
-    Node* previous;
+    DoubleNode* next;
+    DoubleNode* previous;
 };
 
 class DoubleList{
 public:
-    Node* head;
-    Node* tail;
+    DoubleNode* head;
+    DoubleNode* tail;
     DoubleList(){
         head = tail = nullptr;
     }
     void insert(char c){
-        Node* newNode = new Node();
-        newNode->value=c;
+        DoubleNode* newDoubleNode = new DoubleNode();
+        newDoubleNode->value=c;
         if(head == nullptr){
-            head = tail = newNode;
-            newNode->next = newNode->previous = nullptr;
+            head = tail = newDoubleNode;
+            newDoubleNode->next = newDoubleNode->previous = nullptr;
         }else{
-            newNode->next = nullptr;
-            newNode->previous = tail;
-            tail->next = newNode;
-            tail = newNode;
+            newDoubleNode->next = nullptr;
+            newDoubleNode->previous = tail;
+            tail->next = newDoubleNode;
+            tail = newDoubleNode;
         }
     }
     void insertAt(char c, int index){
-        Node* temp = head;
-        Node* after= nullptr;
-        Node* newNode = new Node();
+        DoubleNode* temp = head;
+        DoubleNode* after= nullptr;
+        DoubleNode* newDoubleNode = new DoubleNode();
         if(index == size()-1){
             insert(c);
             return;
@@ -42,24 +42,24 @@ public:
             temp=temp->next;
         }
         after = temp->next;
-        newNode->value=c;
-        temp->next = newNode;
-        newNode->previous = temp;
-        newNode->next=after;
-        after->previous=newNode;
+        newDoubleNode->value=c;
+        temp->next = newDoubleNode;
+        newDoubleNode->previous = temp;
+        newDoubleNode->next=after;
+        after->previous=newDoubleNode;
     }
     void concatenat(DoubleList list2){
         if(list2.head == nullptr){
             return;
         }
-        Node* temp = list2.head;
+        DoubleNode* temp = list2.head;
         temp->previous = tail;
         tail->next = temp;
         list2.head= nullptr;
         tail = list2.tail;
     }
     int size(){
-        Node* temp = head;
+        DoubleNode* temp = head;
         int i = 0;
         while(temp != nullptr){
             temp =temp->next;
@@ -68,19 +68,19 @@ public:
         return i;
     }
     void deleteFirst(){
-        Node* temp = head;
+        DoubleNode* temp = head;
         head = head->next;
         delete temp;
     }
     void deleteLast(){
-        Node* temp = tail;
+        DoubleNode* temp = tail;
         tail = tail->previous;
         tail->next = nullptr;
         delete temp;
     }
     void deleteByIndex(int index){
-        Node* delNode = head;
-        Node* before = nullptr;
+        DoubleNode* delDoubleNode = head;
+        DoubleNode* before = nullptr;
         if(index == 0){
             deleteFirst();
             return;
@@ -90,15 +90,15 @@ public:
             return;
         }
         for (int i = 0; i < index; ++i) {
-            before = delNode;
-            delNode=delNode->next;
+            before = delDoubleNode;
+            delDoubleNode=delDoubleNode->next;
         }
-        delNode->previous->next= delNode->next;
-        delNode->next->previous = delNode->previous;
-        delete delNode;
+        delDoubleNode->previous->next= delDoubleNode->next;
+        delDoubleNode->next->previous = delDoubleNode->previous;
+        delete delDoubleNode;
     }
     bool substring (int index , int length){
-        Node* temp = head;
+        DoubleNode* temp = head;
         if(index + length > size()){
             cout<<"please enter valid input."<<endl;
             return false;
@@ -115,7 +115,7 @@ public:
         return true;
     }
     void printForward(){
-        Node* temp = head;
+        DoubleNode* temp = head;
         while(temp != nullptr){
             cout<<temp->value;
             temp=temp->next;
@@ -126,7 +126,7 @@ public:
     int Search(string substr) {
         if (substr.empty() || head == nullptr)
             return -1;
-        Node* temp = head;
+        DoubleNode* temp = head;
         int index = 0;
         while (temp != nullptr) {
             if (match(temp, substr)){
@@ -139,8 +139,8 @@ public:
         return -1;
     }
 
-    bool match(Node* start, string substr) {
-        Node* temp = start;
+    bool match(DoubleNode* start, string substr) {
+        DoubleNode* temp = start;
         int i = 0;
         while (temp != nullptr && i < substr.size()) {
             if (temp->value != substr[i])
@@ -152,8 +152,8 @@ public:
     }
 
     void replace(string s1 , string s2 , int index){
-        Node* firstTemp = head;
-        Node* secondTemp = head->next;
+        DoubleNode* firstTemp = head;
+        DoubleNode* secondTemp = head->next;
         int counter = index;
         for (int i = 0; i < index; ++i) {
             firstTemp=firstTemp->next;
@@ -173,7 +173,7 @@ public:
 
     }
     void printReverse(){
-        Node* temp = tail;
+        DoubleNode* temp = tail;
         while(temp != nullptr){
             cout<<temp->value;
             temp=temp->previous;
