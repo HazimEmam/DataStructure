@@ -2,7 +2,7 @@
 using namespace std;
 
 #define endl '\n';
-
+int subIndex = -1;
 class Node{
 public:
     char value;
@@ -93,6 +93,7 @@ public:
             cout<<temp->value;
             temp= temp->next;
         }
+        cout<<endl;
         return true;
     }
     void printForward(){
@@ -104,6 +105,30 @@ public:
         cout<<endl;
     }
 
+    int Search(string str){
+        Node* temp = head;
+        string s;
+        for (int i = 0 , j = 0; i < size() ; ++i) {
+            if(temp->value == str[j]){
+                s = s+str[j];
+                j++;
+                //cout<<s<<endl;
+            }
+            temp = temp->next;
+        }
+        if( s == str){
+            temp = head;
+            for (int i = 0; i < size() ; ++i) {
+                if(temp->value == str[0]){
+                    subIndex = i;
+                    break;
+                }
+                temp = temp->next;
+            }
+            return subIndex;
+        }
+        return -1;
+    }
     void printReverse(){
         Node* temp = tail;
         while(temp != nullptr){
@@ -133,17 +158,33 @@ int main() {
     list1.concatenat(list2);
     list1.printForward();
     int index , length;
+    bool flag = false;
     cout<<"Choose a character by index to remove:";
     cin>>index;
     list1.deleteByIndex(index);
     cout<<"List after remove: ";
     list1.printForward();
-    bool flage = false;
-    while(!flage){
+    while(!flag){
         cout<<"Enter index and length to get substring:";
         cin>>index>>length;
-        flage = list1.substring(index,length);
+        flag = list1.substring(index,length);
     }
-
+    flag = false;
+    while (!flag){
+        if(subIndex == -1){
+            string s;
+            cout<<"Search for a string in the list:";
+            cin>>s;
+            int result = list1.Search(s);
+            cout<<"Found at index "<<result<<endl;
+        }else{
+            flag = true;
+        }
+        if(subIndex == -1){
+            cout<<"There is no match strings"<<endl;
+        }
+    }
+    cout<<"Reversed List: ";
+    list1.printReverse();
     return 0;
 }
